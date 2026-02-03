@@ -4,11 +4,17 @@ function agregarAlCarrito(item) {
   carrito.push(item);
   renderCarrito();
 }
-function obtenerNumeroOrden() {
-  let numero = parseInt(localStorage.getItem('numeroOrden')) || 1;
-  localStorage.setItem('numeroOrden', numero + 1);
-  return numero;
+async function inicializarNumeroOrden() {
+  const res = await fetch('/api/comandas');
+  const data = await res.json();
+
+  // iniciar el contador con la última orden + 1
+  numeroOrden = (data.ultimaOrden || 0) + 1;
+  localStorage.setItem('numeroOrden', numeroOrden);
 }
+
+inicializarNumeroOrden();
+
 
 let cafeTemp = null;
 
