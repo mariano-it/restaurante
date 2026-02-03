@@ -82,73 +82,49 @@ function agregarSmoothie(nombre, precio) {
 }
 
 
-function renderCarrito() {
-  const contenedor = document.getElementById('carrito');
-  const totalSpan = document.getElementById('total');
+async function renderComandas() {
+  let comandas;
 
-  contenedor.innerHTML = '';
-  total = 0;
-
-  carrito.forEach(item => {
-    const div = document.createElement('div');
-    div.textContent =
-      `${item.tipo} ${item.nombre || ''}${item.detalle ? ' (' + item.detalle + ')' : ''} — $${item.precio}`;
-    contenedor.appendChild(div);
-    total += item.precio;
-  });
-
-  totalSpan.textContent = total;
-}
-
-async function enviarComanda() {
-  if (carrito.length === 0) {
-    alert('Tu carrito está vacío');
+  try {
+    comandas = await obtenerComandas(); // trae del backend
+  } catch (e) {
+    contenedor.innerHTML = '<p>Error al cargar comandas</p>';
     return;
   }
 
-  const nuevaComanda = {
-    fecha: new Date().toLocaleString(),
-    items: carrito,
-    total: total
-  };
+  contenedor.innerHTML = '';
 
-  const res = await fetch('/api/comandas', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(nuevaComanda)
+  if (comandas.length === 0) {
+    contenedor.innerHTML = '<p>No hay comandas registradas</p>';
+    return;
+  }
+
+  // ✅ Orden descendente por numero para que lo más reciente aparezca arriba
+  comandas.sort((a, b) => b.numero - a.numero);
+
+  comandas.forEach(comanda => {
+    const div = document.createElement('div');
+    div.className = 'comanda';
+
+    div.innerHTML = `
+      <h2>🍽️ Orden #${comanda.numero}</h2>
+      <small>${comanda.fecha}</small>
+      <ul>
+        ${JSON.parse(comanda.items).map(item => `
+          <li>
+            ${item.tipo} ${item.nombre || ''}
+            ${item.detalle ? `(${item.detalle})` : ''}
+            — $${item.precio}
+          </li>
+        `).join('')}
+      </ul>
+      <strong>Total: $${comanda.total}</strong>
+    `;
+
+    contenedor.appendChild(div);
   });
-
-  const { numero } = await res.json(); // <-- número asignado por backend
-
-  carrito = [];
-  renderCarrito();
-
-  alert(`Pedido enviado. Orden #${numero}`);
-
-comandas.forEach(comanda => {
-  const div = document.createElement('div');
-  div.className = 'comanda';
-
-  div.innerHTML = `
-    <h2>🍽️ Orden #${comanda.numero}</h2>
-    <small>${comanda.fecha}</small>
-    <ul>
-      ${JSON.parse(comanda.items).map(item => `
-        <li>
-          ${item.tipo} ${item.nombre || ''}
-          ${item.detalle ? `(${item.detalle})` : ''}
-          — $${item.precio}
-        </li>
-      `).join('')}
-    </ul>
-    <strong>Total: $${comanda.total}</strong>
-  `;
-
-  contenedor.appendChild(div);
-});
-
-
 }
+
 
 
 /*  alert(`🍽️ Tu número de orden es ${orden.numero}. 
