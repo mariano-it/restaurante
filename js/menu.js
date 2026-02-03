@@ -124,6 +124,30 @@ async function enviarComanda() {
   renderCarrito();
 
   alert(`Pedido enviado. Orden #${numero}`);
+
+comandas.forEach(comanda => {
+  const div = document.createElement('div');
+  div.className = 'comanda';
+
+  div.innerHTML = `
+    <h2>🍽️ Orden #${comanda.numero}</h2>
+    <small>${comanda.fecha}</small>
+    <ul>
+      ${JSON.parse(comanda.items).map(item => `
+        <li>
+          ${item.tipo} ${item.nombre || ''}
+          ${item.detalle ? `(${item.detalle})` : ''}
+          — $${item.precio}
+        </li>
+      `).join('')}
+    </ul>
+    <strong>Total: $${comanda.total}</strong>
+  `;
+
+  contenedor.appendChild(div);
+});
+
+
 }
 
 
