@@ -25,8 +25,19 @@
 
 <div id="inicio">
   <h2>Selecciona un restaurante</h2>
-  <button onclick="abrirRestaurante('rengodeli')">Rengodeli</button>
-  <button onclick="abrirRestaurante('ventanita')">Ventanita Deli</button>
+<button
+  class="boton-restaurante ventanita"
+  onclick="abrirRestaurante('ventanita', this)">
+  Ventanita Deli
+</button>
+
+<button
+  class="boton-restaurante rengo"
+  onclick="abrirRestaurante('rengodeli', this)">
+  Rengo Deli
+</button>
+
+
 </div>
 
 <hr>
@@ -35,6 +46,9 @@
 <section id="menu-rengodeli" style="display: none;">
   <h2>RENGODELI</h2>
 
+<button class="secondary" onclick="volverInicio()">
+  ← Cambiar restaurante
+</button>
 
 
 <p><strong>Advertencia:</strong> El consumo de mariscos crudos es responsabilidad de quien los consume y aumenta el riesgo de intoxicación o infección. Notifique al cajero si tiene alguna alergia previo al consumo. Las carnes de Arrachera, Pollo y Carne Oriental ya se encuentran cocidas.</p>
@@ -342,6 +356,11 @@
   <!-- ===================== VENTANITA DELI ===================== -->
 <section id="menu-ventanita" style="display:none;">
   <h2>VENTANITA DELI</h2>
+
+<button class="secondary" onclick="volverInicio()">
+  ← Cambiar restaurante
+</button>
+
 
   <!-- CAFÉ -->
   <h3 onclick="toggleSeccionVentanita('cafe')">☕ Café / Frappes 16oz</h3>
