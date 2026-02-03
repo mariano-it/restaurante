@@ -11,36 +11,41 @@ export async function onRequest({ request, env }) {
   }
 
   // POST → guardar comanda
-  if (request.method === 'POST') {
-    const data = await request.json();
+if (request.method === 'POST') {
+  const data = await request.json();
 
-    await env.DB.prepare(`
-      INSERT INTO comandas (numero, fecha, items, total)
-      VALUES (?, ?, ?, ?)
-    `).bind(
-      data.numero,
-      data.fecha,
-      JSON.stringify(data.items),
-      data.total
-    ).run();
+  // Obtener el último número de orden registrado
+  const { results } = await env.DB
+    .prepare(`SELECT MAX(numero) as ultimo FROM comandas`)
+    .all();
 
-    return new Response(
-      JSON.stringify({ ok: true }),
-      { headers }
-    );
-  }
+  const ultimoNumero = results[0]?.ultimo || 0;
+  const nuevoNumero = ultimoNumero + 1; // nuevo número consecutivo
+
+  await env.DB.prepare(`
+    INSERT INTO comandas (numero, fecha, items, total)
+    VALUES (?, ?, ?, ?)
+  `).bind(
+    nuevoNumero,
+    data.fecha,
+    JSON.stringify(data.items),
+    data.total
+  ).run();
+
+  return new Response(
+    JSON.stringify({ ok: true, numero: nuevoNumero }),
+    { headers }
+  );
+}
 
   // GET → leer comandas
-  if (request.method === 'GET') {
-    const { results } = await env.DB
-      .prepare(`SELECT * FROM comandas ORDER BY id DESC`)
-      .all();
+if (request.method === 'GET') {
+  const { results } = await env.DB
+    .prepare(`SELECT * FROM comandas ORDER BY numero DESC`)
+    .all();
 
-    return new Response(
-      JSON.stringify(results),
-      { headers }
-    );
-  }
-
-  return new Response('Method not allowed', { status: 405, headers });
-}
+  return new Response(
+    JSON.stringify(results),
+    { headers }
+  );
+}}
