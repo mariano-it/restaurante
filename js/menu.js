@@ -100,29 +100,25 @@ function renderCarrito() {
   totalSpan.textContent = total;
 }
 
-function enviarComanda() {
+async function enviarComanda() {
   if (carrito.length === 0) {
     alert('Tu carrito está vacío');
     return;
   }
 
-
-  const numero = obtenerNumeroOrden();
-
   const nuevaComanda = {
-    numero: numero,
     fecha: new Date().toLocaleString(),
     items: carrito,
     total: total
   };
 
+  const res = await fetch('/api/comandas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(nuevaComanda)
+  });
 
-fetch('/api/comandas', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(nuevaComanda)
-})
-
+  const { numero } = await res.json(); // <-- número asignado por backend
 
   carrito = [];
   renderCarrito();
