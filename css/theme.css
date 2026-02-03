@@ -1,0 +1,13 @@
+[data-theme="rengodeli"] {
+  --primary: #f97316;     /* naranja */
+  --secondary: #dc2626;   /* rojo */
+  --accent: #0f172a;      /* azul marino (precios) */
+  --soft: #16a34a;        /* verde leve */
+}
+
+[data-theme="ventanita"] {
+  --primary: #15803d;     /* verde */
+  --secondary: #f97316;   /* naranja */
+  --accent: #374151;     /* gris oscuro */
+  --soft: #e5e7eb;        /* gris claro */
+}
