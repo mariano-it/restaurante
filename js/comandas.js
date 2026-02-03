@@ -30,7 +30,7 @@ async function renderComandas() {
     return;
   }
 
-  comandas.slice().reverse().forEach(comanda => {
+  comandas.forEach(comanda => {
     const div = document.createElement('div');
     div.className = 'comanda';
 
