@@ -13,14 +13,11 @@
 
 </head>
 <body>
-<!--Codigo del carrito-->
-<div id="inicio">
-  <h1>Menú Digital</h1>
+  
+  <div id="inicio">.
+     <h1>Menú Digital</h1>
 
-  <h3>🛒 Tu pedido</h3>
-<div id="carrito"></div>
-<h3>Total: $<span id="total">0</span></h3>
-<button onclick="enviarComanda()">Enviar pedido</button>
+    <!--Codigo del carrito-->
 
   <h2>Selecciona un restaurante</h2>
 <button
@@ -347,6 +344,8 @@
     Acompaña tu comida con un agua del día +$15
   </label>
 </section>
+
+
 
 <hr>
 
@@ -801,11 +800,16 @@
       </li>
     </ul>
   </div>
-
   </section>
+
+    <div id="carrito" class="carrito">
+    <h3>🛒 Tu pedido</h3>
+    <ul id="carrito-items"></ul>
+    <strong>Total: $<span id="total">0</span></strong>
+    <button onclick="enviarComanda()">Enviar pedido</button>
+  </div>
 
 <script src="./js/menu.js"></script>
 
 </body>
 </html>
-
