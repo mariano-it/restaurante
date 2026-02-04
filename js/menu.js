@@ -471,5 +471,3 @@ function volverInicio() {
   // mostrar inicio
   document.getElementById('inicio').style.display = 'block';
 }
-
-
