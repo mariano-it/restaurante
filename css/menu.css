@@ -56,32 +56,6 @@ button:active {
   box-shadow: 0 -8px 24px rgba(0,0,0,.1);
 }
 
-@media (max-width: 768px) {
-
-  body {
-    font-size: 18px;
-  }
-
-  h1, h2 {
-    text-align: center;
-    font-size: 1.8rem;
-  }
-
-  button {
-    font-size: 1.1rem;
-    padding: 14px 18px;
-    width: 100%;
-    margin-bottom: 12px;
-  }
-
-  .menu-seccion,
-  .producto,
-  .opcion {
-    margin-bottom: 14px;
-  }
-
-}
-
 .producto {
   font-size: 1.1rem;
   padding: 12px;
@@ -139,3 +113,100 @@ button.secondary {
   color: #111;
   margin-bottom: 16px;
 }
+
+/* =========================
+   MOBILE FIX — PRIORIDAD
+========================= */
+@media (max-width: 768px) {
+
+  body {
+    padding: 12px;
+    font-size: 18px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  section {
+    padding: 12px 8px;
+  }
+
+  .producto,
+  .opcion {
+    font-size: 1.15rem;
+    padding: 14px;
+    line-height: 1.4;
+  }
+
+  .precio {
+    font-size: 1.3rem;
+  }
+
+  .boton-restaurante {
+    width: 100%;
+    max-width: 320px;
+    font-size: 1.2rem;
+    padding: 16px;
+    text-align: center;
+  }
+
+  #inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #carrito {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    border-top: 2px solid #ddd;
+  }
+
+}
+
+/* ===== MOBILE LANDING FIX ===== */
+@media (max-width: 768px) {
+
+  #inicio {
+    min-height: 100svh;
+    justify-content: center;
+  }
+
+  #inicio + section,
+  #inicio + div {
+    display: none;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  #menu-ventanita,
+  #menu-rengodeli {
+    min-height: 100dvh;
+    width: 100%;
+    padding-bottom: 140px; /* espacio para carrito */
+  }
+
+}
+
+#carrito {
+  height: auto;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+
