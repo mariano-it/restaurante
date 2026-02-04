@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menú Digital | Ventanita & Rengodeli</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,18 +13,15 @@
 
 </head>
 <body>
-  
-<h1>Menú Digital</h1>
-
 <!--Codigo del carrito-->
-<h3>🛒 Tu pedido</h3>
+<div id="inicio">
+  <h1>Menú Digital</h1>
+
+  <h3>🛒 Tu pedido</h3>
 <div id="carrito"></div>
 <h3>Total: $<span id="total">0</span></h3>
-
-
 <button onclick="enviarComanda()">Enviar pedido</button>
 
-<div id="inicio">
   <h2>Selecciona un restaurante</h2>
 <button
   class="boton-restaurante ventanita"
@@ -36,7 +34,6 @@
   onclick="abrirRestaurante('rengodeli', this)">
   Rengo Deli
 </button>
-
 
 </div>
 
@@ -808,5 +805,6 @@
   </section>
 
 <script src="./js/menu.js"></script>
+
 </body>
 </html>
