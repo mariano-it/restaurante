@@ -157,23 +157,27 @@ button.secondary {
     text-align: center;
   }
 
-  #inicio {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
+#inicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 100vh;
+  text-align: center;
+}
 
-  #carrito {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    border-top: 2px solid #ddd;
-  }
+.carrito {
+  margin-top: 24px;
+  background: var(--card);
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
 
 }
+
 
 /* ===== MOBILE LANDING FIX ===== */
 @media (max-width: 768px) {
@@ -206,7 +210,7 @@ button.secondary {
 }
 
 html {
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 300%;
 }
 
 
