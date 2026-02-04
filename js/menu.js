@@ -1,9 +1,35 @@
 let numeroOrden = parseInt(localStorage.getItem('numeroOrden')) || 1;
 verificarNuevoDia();
+
+let carrito = [];
+let total = 0;
+
+function renderCarrito() {
+  const contenedor = document.getElementById('carrito-items');
+  const totalEl = document.getElementById('total');
+
+  if (!contenedor || !totalEl) return;
+
+  contenedor.innerHTML = '';
+  total = 0;
+
+  carrito.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent =
+      `${item.tipo} ${item.nombre || ''}${item.detalle ? ' (' + item.detalle + ')' : ''} — $${item.precio}`;
+    contenedor.appendChild(li);
+    total += item.precio;
+  });
+
+  totalEl.textContent = total;
+}
+
+
 function agregarAlCarrito(item) {
   carrito.push(item);
   renderCarrito();
 }
+
 async function inicializarNumeroOrden() {
   const res = await fetch('/api/comandas');
   const data = await res.json();
@@ -82,63 +108,32 @@ function agregarSmoothie(nombre, precio) {
 }
 
 
-async function renderComandas() {
-  let comandas;
-
-  try {
-    comandas = await obtenerComandas(); // trae del backend
-  } catch (e) {
-    contenedor.innerHTML = '<p>Error al cargar comandas</p>';
+async function enviarComanda() {
+  if (carrito.length === 0) {
+    alert('Tu carrito está vacío');
     return;
   }
 
-  contenedor.innerHTML = '';
+  const nuevaComanda = {
+    numero: numeroOrden,
+    fecha: new Date().toLocaleString(),
+    items: carrito,
+    total: total
+  };
 
-  if (comandas.length === 0) {
-    contenedor.innerHTML = '<p>No hay comandas registradas</p>';
-    return;
-  }
-
-  // ✅ Orden descendente por numero para que lo más reciente aparezca arriba
-  comandas.sort((a, b) => b.numero - a.numero);
-
-  comandas.forEach(comanda => {
-    const div = document.createElement('div');
-    div.className = 'comanda';
-
-    div.innerHTML = `
-      <h2>🍽️ Orden #${comanda.numero}</h2>
-      <small>${comanda.fecha}</small>
-      <ul>
-        ${JSON.parse(comanda.items).map(item => `
-          <li>
-            ${item.tipo} ${item.nombre || ''}
-            ${item.detalle ? `(${item.detalle})` : ''}
-            — $${item.precio}
-          </li>
-        `).join('')}
-      </ul>
-      <strong>Total: $${comanda.total}</strong>
-    `;
-
-    contenedor.appendChild(div);
+  await fetch('/api/comandas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(nuevaComanda)
   });
+
+  numeroOrden++;
+  carrito = [];
+  renderCarrito();
+
+alert(`Pedido enviado. Orden #${nuevaComanda.numero}`);
 }
 
-
-
-/*  alert(`🍽️ Tu número de orden es ${orden.numero}. 
-Ten listo tu método de pago cuando lo llamen.`);*/
-
-let carrito = [];
-let total = 0;
-
-let seleccionActual = {
-  antojo: null,
-  categoria: null,
-  guiso: null,
-  precio: 0
-};
 
 // mostrar menu
   function mostrarMenu(restaurante) {
@@ -376,7 +371,6 @@ function aplicarPromoTacos(tipo) {
     detalle: descripcion,
     precio: precioPromo
   });
-
   renderCarrito();
 }
 
@@ -449,6 +443,7 @@ function verificarNuevoDia() {
   }
 }
 
+
 function volverInicio() {
   const confirmar = carrito.length === 0 || confirm(
     '¿Quieres cambiar de restaurante? El carrito actual se vaciará.'
@@ -458,16 +453,12 @@ function volverInicio() {
 
   carrito = [];
   total = 0;
-  renderCarrito();
+  renderCarrito()
 
-  // quitar estado activo → vuelve a negro con transición
   document.querySelectorAll('.boton-restaurante')
     .forEach(b => b.classList.remove('activo'));
 
-  // ocultar menús
   document.getElementById('menu-ventanita').style.display = 'none';
   document.getElementById('menu-rengodeli').style.display = 'none';
-
-  // mostrar inicio
   document.getElementById('inicio').style.display = 'block';
 }
