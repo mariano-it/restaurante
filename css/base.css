@@ -11,3 +11,13 @@
   --secondary: #eaeaea;   /* botón secundario */
   --button-text: #ffffff;
 }
+
+html, body {
+  height: 100%;
+}
+
+#app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
