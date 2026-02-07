@@ -11,10 +11,6 @@ async function obtenerComandas() {
   return await res.json();
 }
 
-comandas
-  .sort((a, b) => b.numero - a.numero)
-  .forEach(comanda => {
-
 /* ========= RENDER ========= */
 async function renderComandas() {
   let comandas;
@@ -28,60 +24,49 @@ async function renderComandas() {
 
   contenedor.innerHTML = '';
 
-  if (!Array.isArray(comandas) || comandas.length === 0) {
+  if (comandas.length === 0) {
     contenedor.innerHTML = '<p>No hay comandas registradas</p>';
     return;
   }
 
-  // 👉 las más recientes arriba
-  comandas.reverse();
+  // 🔽 ORDENAR: la más nueva arriba
+  comandas.sort((a, b) => b.numero - a.numero);
 
   comandas.forEach(comanda => {
     const div = document.createElement('div');
     div.className = 'comanda';
 
-    const items = comanda.items
-      ? JSON.parse(comanda.items)
-      : [];
-
     div.innerHTML = `
-      <h2>🍽️ ${comanda.nombre}</h2>
+      <h2>🍽️ ${comanda.nombre || 'Sin nombre'}</h2>
       <small>
-        📞 ${comanda.telefono}<br>
-        ⏰ Para las ${comanda.hora}<br>
+        📞 ${comanda.telefono || 'N/A'} <br>
+        ⏰ Para las ${comanda.hora || 'N/A'} <br>
         📅 ${comanda.fecha}
       </small>
 
-      ${
-        items.length
-          ? `<ul>
-              ${items.map(item => `
-                <li>
-                  ${item.tipo} ${item.nombre || ''}
-                  ${item.detalle ? `(${item.detalle})` : ''}
-                  — $${item.precio}
-                </li>
-              `).join('')}
-            </ul>`
-          : '<p><em>Sin productos</em></p>'
-      }
+      <ul>
+        ${JSON.parse(comanda.items).map(item => `
+          <li>
+            ${item.tipo} ${item.nombre || ''}
+            ${item.detalle ? `(${item.detalle})` : ''}
+            — $${item.precio}
+          </li>
+        `).join('')}
+      </ul>
 
-      <strong>Total: $${comanda.total || 0}</strong>
+      <strong>Total: $${comanda.total}</strong>
 
-      ${
-        comanda.comentario
-          ? `<p><strong>📝 Comentario:</strong> ${comanda.comentario}</p>`
-          : ''
-      }
+      ${comanda.comentario 
+        ? `<p><strong>📝 Comentario:</strong> ${comanda.comentario}</p>` 
+        : ''}
     `;
 
     contenedor.appendChild(div);
   });
 }
-});
+
 /* ========= AUTO-REFRESH ========= */
 setInterval(renderComandas, 5000);
 
 /* ========= INIT ========= */
 renderComandas();
-
