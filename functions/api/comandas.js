@@ -25,15 +25,18 @@ export async function onRequest({ request, env }) {
       const nuevoNumero = ultimoNumero + 1;
 
       await env.DB.prepare(`
-        INSERT INTO comandas (numero, fecha, items, total, comentario)
-        VALUES (?, ?, ?, ?, ?)
+      INSERT INTO comandas (numero, nombre, telefono, hora, fecha, items, total)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
       `).bind(
         nuevoNumero,
+        data.nombre,
+        data.telefono,
+        data.hora,
         data.fecha,
-        JSON.stringify(data.items),
-        data.total,
-        data.comentario || null
+      JSON.stringify(data.items),
+        data.total
       ).run();
+
 
       return new Response(
         JSON.stringify({
@@ -67,3 +70,4 @@ export async function onRequest({ request, env }) {
     );
   }
 }
+
