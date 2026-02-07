@@ -11,7 +11,6 @@ async function obtenerComandas() {
   return await res.json();
 }
 
-
 /* ========= RENDER ========= */
 async function renderComandas() {
   let comandas;
@@ -25,42 +24,51 @@ async function renderComandas() {
 
   contenedor.innerHTML = '';
 
-  if (comandas.length === 0) {
+  if (!Array.isArray(comandas) || comandas.length === 0) {
     contenedor.innerHTML = '<p>No hay comandas registradas</p>';
     return;
   }
 
-  if (comanda.tipo === 'feedback') {
-  div.innerHTML = `
-    <h3>💬 Comentario</h3>
-    <small>${comanda.fecha}</small>
-    <p>${comanda.comentario}</p>
-  `;
-}
+  // 👉 las más recientes arriba
+  comandas.reverse();
 
   comandas.forEach(comanda => {
     const div = document.createElement('div');
     div.className = 'comanda';
 
+    const items = comanda.items
+      ? JSON.parse(comanda.items)
+      : [];
+
     div.innerHTML = `
-  <h2>🍽️ ${comanda.nombre}</h2>
-  <small>
-📞 ${comanda.telefono} <br>
-⏰ Para las ${comanda.hora}
-</small>
-      <ul>
-        ${JSON.parse(comanda.items).map(item => `
-          <li>
-            ${item.tipo} ${item.nombre || ''}
-            ${item.detalle ? `(${item.detalle})` : ''}
-            — $${item.precio}
-          </li>
-        `).join('')}
-      </ul>
-      <strong>Total: $${comanda.total}</strong>
-      ${comanda.comentario 
-        ? `<p><strong>📝 Comentario:</strong> ${comanda.comentario}</p>` 
-        : ''}
+      <h2>🍽️ ${comanda.nombre}</h2>
+      <small>
+        📞 ${comanda.telefono}<br>
+        ⏰ Para las ${comanda.hora}<br>
+        📅 ${comanda.fecha}
+      </small>
+
+      ${
+        items.length
+          ? `<ul>
+              ${items.map(item => `
+                <li>
+                  ${item.tipo} ${item.nombre || ''}
+                  ${item.detalle ? `(${item.detalle})` : ''}
+                  — $${item.precio}
+                </li>
+              `).join('')}
+            </ul>`
+          : '<p><em>Sin productos</em></p>'
+      }
+
+      <strong>Total: $${comanda.total || 0}</strong>
+
+      ${
+        comanda.comentario
+          ? `<p><strong>📝 Comentario:</strong> ${comanda.comentario}</p>`
+          : ''
+      }
     `;
 
     contenedor.appendChild(div);
@@ -68,7 +76,6 @@ async function renderComandas() {
 }
 
 /* ========= AUTO-REFRESH ========= */
-// refresca cada 5 segundos (simple y efectivo)
 setInterval(renderComandas, 5000);
 
 /* ========= INIT ========= */
