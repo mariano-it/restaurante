@@ -177,11 +177,14 @@ async function enviarComanda() {
     total
   };
 
-  const res = await fetch('/api/comandas', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(nuevaComanda)
-  });
+sessionStorage.setItem('ticket', JSON.stringify({
+  nombre,
+  telefono,
+  hora,
+  items: carrito,
+  total,
+  fecha: new Date().toLocaleString()
+});
 
   const data = await res.json();
 
@@ -199,7 +202,7 @@ async function enviarComanda() {
   document.getElementById('hora-pedido').value = '';
 
   // 👉 REDIRECCIÓN CORRECTA
-  window.location.href = `/ticket.html?orden=${data.numero}`;
+  window.location.href = '/ticket.html';
 }
 
 // 🔗 Link de pago (pendiente)
@@ -566,3 +569,4 @@ function volverInicio() {
   document.getElementById('menu-rengodeli').style.display = 'none';
   document.getElementById('inicio').style.display = 'block';
 }
+
