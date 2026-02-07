@@ -11,6 +11,10 @@ async function obtenerComandas() {
   return await res.json();
 }
 
+comandas
+  .sort((a, b) => b.numero - a.numero)
+  .forEach(comanda => {
+
 /* ========= RENDER ========= */
 async function renderComandas() {
   let comandas;
@@ -74,9 +78,10 @@ async function renderComandas() {
     contenedor.appendChild(div);
   });
 }
-
+});
 /* ========= AUTO-REFRESH ========= */
 setInterval(renderComandas, 5000);
 
 /* ========= INIT ========= */
 renderComandas();
+
