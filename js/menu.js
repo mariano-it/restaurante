@@ -177,19 +177,20 @@ async function enviarComanda() {
     total
   };
 
-sessionStorage.setItem('ticket', JSON.stringify({
-  nombre,
-  telefono,
-  hora,
-  items: carrito,
-  total,
-  fecha: new Date().toLocaleString()
-});
+  // 👉 GUARDAR PARA EL TICKET
+  sessionStorage.setItem('ticket', JSON.stringify(nuevaComanda));
+
+  // 👉 ENVIAR A BACKEND (ESTO FALTABA)
+  const res = await fetch('/api/comandas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(nuevaComanda)
+  });
 
   const data = await res.json();
 
-  if (!data.numero) {
-    alert('Error al generar el ticket');
+  if (!data.success) {
+    alert('Error al enviar la comanda');
     return;
   }
 
@@ -201,9 +202,10 @@ sessionStorage.setItem('ticket', JSON.stringify({
   document.getElementById('telefono-cliente').value = '';
   document.getElementById('hora-pedido').value = '';
 
-  // 👉 REDIRECCIÓN CORRECTA
+  // 👉 REDIRECCIÓN
   window.location.href = '/ticket.html';
 }
+
 
 // 🔗 Link de pago (pendiente)
 const LINK_PAGO = ''; // ← aquí va el link cuando lo manden
@@ -569,4 +571,5 @@ function volverInicio() {
   document.getElementById('menu-rengodeli').style.display = 'none';
   document.getElementById('inicio').style.display = 'block';
 }
+
 
