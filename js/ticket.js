@@ -1,29 +1,26 @@
-async function cargarTicket() {
+function cargarTicket() {
+  const data = JSON.parse(sessionStorage.getItem('ticket'));
 
-  const params = new URLSearchParams(window.location.search);
-  const orden = params.get('orden');
-
-  const res = await fetch('/api/comandas');
-  const comandas = await res.json();
-
-  const comanda = comandas.find(c => c.numero == orden);
-
-  if (!comanda) return;
+  if (!data) {
+    document.getElementById('ticket').innerHTML =
+      '<p>No hay información del pedido.</p>';
+    return;
+  }
 
   const contenedor = document.getElementById('ticket');
 
   contenedor.innerHTML = `
     <h1>🧾 Pedido confirmado</h1>
 
-    <p><strong>Orden:</strong> #${comanda.numero}</p>
-    <p><strong>Nombre:</strong> ${comanda.nombre}</p>
-    <p><strong>Celular:</strong> ${comanda.telefono}</p>
-    <p><strong>Hora:</strong> ${comanda.hora}</p>
+    <p><strong>Nombre:</strong> ${data.nombre}</p>
+    <p><strong>Celular:</strong> ${data.telefono}</p>
+    <p><strong>Hora:</strong> ${data.hora}</p>
+    <p><strong>Fecha:</strong> ${data.fecha}</p>
 
     <hr>
 
     <ul>
-      ${JSON.parse(comanda.items).map(item => `
+      ${data.items.map(item => `
         <li>
           ${item.tipo} ${item.nombre || ''} 
           ${item.detalle ? '(' + item.detalle + ')' : ''}
@@ -32,12 +29,17 @@ async function cargarTicket() {
       `).join('')}
     </ul>
 
-    <div class="total">Total: $${comanda.total}</div>
+    <div class="total">Total: $${data.total}</div>
 
-    <button onclick="window.location.href='index.html'">
+    <button onclick="volverMenu()">
       Volver al menú
     </button>
   `;
+}
+
+function volverMenu() {
+  sessionStorage.removeItem('ticket');
+  window.location.href = 'index.html';
 }
 
 cargarTicket();
