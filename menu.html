@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Digital | Ventanita & Rengodeli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/menu.css">
+
+</head>
+<body>
+  
+  <div id="inicio">.
+     <h1>Menú Digital</h1>
+  <h2>Selecciona un restaurante</h2>
+<button class="boton-restaurante ventanita" onclick="abrirRestaurante('ventanita', this)">
+  <img src="./assets/boton ventanita deli.png" alt="Ventanita Deli" class="logo-rest">
+  Ventanita Deli
+</button>
+
+<button class="boton-restaurante rengo" onclick="abrirRestaurante('rengodeli', this)">
+  <img src="./assets/rengo deli botones.png" alt="Rengo Deli" class="logo-rest">
+  Rengo Deli
+</button>
+
+</div>
+
+<hr>
+
+<!-- ===================== RENGODELI ===================== -->
+<div id="menu-rengodeli" style="display:none;">
+  <div class="menu-header">
+    <img src="./assets/rengo deli.png" alt="Rengo Deli">
+    <h2>Rengo Deli</h2>
+  </div>
+
+<button class="secondary" onclick="volverInicio()">
+  ← Cambiar restaurante
+</button>
+
+
+<p><strong>Advertencia:</strong> El consumo de mariscos crudos es responsabilidad de quien los consume y aumenta el riesgo de intoxicación o infección. Notifique al cajero si tiene alguna alergia previo al consumo. Las carnes de Arrachera, Pollo y Carne Oriental ya se encuentran cocidas.</p>
+
+
+  <h3 onclick="toggleSeccionRengodeli('rollos')">🍣 Rollos</h3>
+<div id="rollos" style="display:none;">
+   <p>No lleva extras. Checklist opcional: con todo. Modificar ingredientes: quitar, no agregar.</p>
+
+  <ul>
+    <li>
+  Veggie roll — Pepino + aguacate + queso crema  
+  Normal $90 | Empanizado $110  
+  <br>
+  <button onclick="agregarAlCarrito({
+    tipo: 'rollo',
+    nombre: 'Veggie roll',
+    detalle: 'Normal',
+    precio: 90
+  })">Agregar Normal</button>
+
+  <button onclick="agregarAlCarrito({
+    tipo: 'rollo',
+    nombre: 'Veggie roll',
+    detalle: 'Empanizado',
+    precio: 110
+  })">Agregar Empanizado</button>
+</li>
+
+    <li>
+      Sakura roll — Aguacate + queso crema + arrachera  
+      Normal $130 | Empanizado $150  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Sakura roll',
+        detalle: 'normal',
+        precio: 130
+      })">Agregar Normal</button>
+
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Sakura roll',
+        detalle: 'Empanizado',
+        precio: 150
+      })">Agregar Empanizado</button>
+    </li>
+
+    <li>
+      Buta roll — Pepino + aguacate + plátano macho  
+      Normal $95 | Empanizado $115  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Buta roll',
+        detalle: 'normal',
+        precio: 95
+      })">Agregar Normal</button>
+
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Buta roll',
+        detalle: 'Empanizado',
+        precio: 115
+      })">Agregar Empanizado</button>
+    </li>
+
+    <li>
+      Nami roll — Surimi + aguacate + plátano macho  
+      Normal $85 | Empanizado $105  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Nami roll',
+        detalle: 'normal',
+        precio: 85
+      })">Agregar Normal</button>
+
+            <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Nami roll',
+        detalle: 'Empanizado',
+        precio: 105
+      })">Agregar Empanizado</button>
+    </li>
+
+    <li>
+      Akari roll — Camarón + aguacate + plátano macho  
+      Normal $95 | Empanizado $115  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Akari roll',
+        detalle: 'normal',
+        precio: 95
+      })">Agregar Normal</button>
+
+            <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Akari roll',
+        detalle: 'Empanizado',
+        precio: 115
+      })">Agregar Empanizado</button>
+    </li>
+
+    <li>
+      Kanikama roll — Pepino + zanahoria + surimi + queso crema  
+      Normal $80 | Empanizado $100  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Kanikama roll',
+        detalle: 'normal',
+        precio: 80
+      })">Agregar Normal</button>
+
+            <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Kanikama roll',
+        detalle: 'Empanizado',
+        precio: 100
+      })">Agregar Empanizado</button>
+    </li>
+
+    <li>
+      Spicy Salmon Roll — Queso crema + aguacate + salmón + aderezo de chipotle  
+      Normal $145 | Empanizado $165  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Spicy Salmon roll',
+        detalle: 'normal',
+        precio: 145
+      })">Agregar Normal</button>
+
+            <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Spicy Salmon roll',
+        detalle: 'Empanizado',
+        precio: 165
+      })">Agregar Empanizado</button>
+    </li>
+
+    <li>
+      Salmon Roll — Queso crema + aguacate + salmón  
+      Normal $135 | Empanizado $155  
+      <br>
+      <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Salmon roll',
+        detalle: 'normal',
+        precio: 135
+      })">Agregar Normal</button>
+
+            <button onclick="agregarAlCarrito({
+        tipo: 'rollo',
+        nombre: 'Salmon roll',
+        detalle: 'Empanizado',
+        precio: 155
+      })">Agregar Empanizado</button>
+    </li>
+  </ul>
+
+</div>
+
+<h3 onclick="toggleSeccionRengodeli('postres')">🍰 Postres</h3>
+<div id="postres" style="display:none;">
+<ul>
+
+   <li>
+  Kushiage (queso crema, manchego, plátano) — $35
+  <button onclick="agregarAlCarrito({
+    tipo: 'postres',
+    nombre: 'Kushiage',
+    precio: 35
+  })">Agregar</button>
+</li>
+
+    <li>
+      Plátano feria — Plátano frito + crema + mezcla de quesos ventanita — $85
+      <button onclick="agregarAlCarrito({
+        tipo: 'postres',
+        nombre: 'Platano feria',
+        precio: 85
+      })">Agregar</button>
+    </li>
+  </ul>
+
+  <h3>Extras</h3>
+<label>
+  <input type="checkbox" onchange="toggleExtra('Tampico',30,this)">
+  Tampico +$30
+</label><br>
+
+<label>
+  <input type="checkbox" onchange="toggleExtra('Salsa anguila',5,this)">
+  Salsa anguila +$5
+</label>
+</div>
+
+<h3 onclick="toggleSeccionRengodeli('antojo')">🍽️ Elige tu antojo</h3>
+<div id="antojo" style="display:none;">
+
+  <button onclick="mostrarAntojo('yakimeshi')">Yakimeshi</button>
+  <button onclick="mostrarAntojo('tacos')">Tacos</button>
+  <button onclick="mostrarAntojo('empanadas')">Empanadas</button>
+  <button onclick="mostrarAntojo('chilaquiles')">Chilaquiles</button>
+  <button onclick="mostrarAntojo('salbutes')">Salbutes</button>
+
+</div>
+
+   <div id="yakimeshi" style="display:none;">
+  <h4>Yakimeshi</h4>
+  <p>Selecciona la categoría:</p>
+
+  <button onclick="seleccionarCategoriaAntojo('yakimeshi','natural', 70)">Natural $70 (450g)</button>
+  <button onclick="seleccionarCategoriaAntojo('yakimeshi','clasicos', 85)">Clásicos $85 (500g)</button>
+  <button onclick="seleccionarCategoriaAntojo('yakimeshi','tradicionales', 95)">Tradicional $95 (500g)</button>
+  <button onclick="seleccionarCategoriaAntojo('yakimeshi','premium', 135)">Premium $135 (500g)</button>
+</div>
+
+    <div id="tacos" style="display:none;">
+  <h4>Tacos (1 pz)</h4>
+  <p>Selecciona la categoría:</p>
+
+  <button onclick="seleccionarCategoriaAntojo('tacos','clasicos', 20)">Clásicos $20</button>
+  <button onclick="seleccionarCategoriaAntojo('tacos','tradicionales', 25)">Tradicionales $25</button>
+  <button onclick="seleccionarCategoriaAntojo('tacos','premium', 30)">Premium $30</button>
+
+ <h4>¿Deseas la promoción de tacos?</h4>
+<button onclick="aplicarPromoTacos('clasicos')">Promo 3 Clásicos $50</button>
+<button onclick="aplicarPromoTacos('tradicionales')">Promo 3 Tradicionales $60</button>
+<button onclick="noPromoTacos()">No, pedir normal</button>
+
+  <div id="promo-tacos" style="display:none;">
+    <p><strong>Promo:</strong> 3 clásicos $50 | 3 tradicionales $60</p>
+  </div>
+</div>
+
+    <div id="empanadas" style="display:none;">
+  <h4>Empanadas (1pz) </h4>
+
+  <p>Selecciona la categoría:</p>
+<button onclick="seleccionarCategoriaAntojo('empanadas','clasicos',25)">Clásicos $25</button>
+<button onclick="seleccionarCategoriaAntojo('empanadas','tradicionales',30)">Tradicionales $30</button>
+<button onclick="seleccionarCategoriaAntojo('empanadas','premium',35)">Premium $35</button>
+    </div>
+
+   <div id="chilaquiles" style="display:none;">
+  <h4>Chilaquiles</h4>
+
+  <p>Selecciona la categoría:</p>
+  <button onclick="seleccionarCategoriaAntojo('chilaquiles','natural', 106)">Natural $106 (350g)</button>
+  <button onclick="seleccionarCategoriaAntojo('chilaquiles','clasicos', 115)">Clásicos $115 (450g)</button>
+  <button onclick="seleccionarCategoriaAntojo('chilaquiles','tradicionales', 135)">Tradicional $135 (450g)</button>
+  <button onclick="seleccionarCategoriaAntojo('chilaquiles','premium', 160)">Premium $160 (450g)</button>
+</div>
+
+    <div id="salbutes" style="display:none;">
+  <h4>Salbutes (1 pz)</h4>
+  <p>Selecciona la categoría:</p>
+
+  <button onclick="seleccionarCategoria('clasicos')">Clásicos $25</button>
+  <button onclick="seleccionarCategoria('tradicionales')">Tradicionales $30</button>
+  <button onclick="seleccionarCategoria('premium')">Premium $35</button>
+</div>
+
+  </ul>
+
+  <div id="guisos-clasicos" style="display:none;">
+  <h4>Guisos Clásicos</h4>
+  <button onclick="seleccionarGuisoFinal('Chicharrón prensado')">Chicharrón prensado</button>
+  <button onclick="seleccionarGuisoFinal('Picadillo')">Picadillo</button>
+  <button onclick="seleccionarGuisoFinal('Champiñón')">Champiñón</button>
+  <button onclick="seleccionarGuisoFinal('Papa con chorizo')">Papa con Chorizo</button>
+  <button onclick="seleccionarGuisoFinal('Tinga de Pollo')">Tinga de Pollo</button>
+  <button onclick="seleccionarGuisoFinal('Huevo duro')">Huevo duro</button>
+  <button onclick="seleccionarGuisoFinal('Guiso del dia')">Guiso del dia</button>
+  <button onclick="seleccionarGuisoFinal('Queso')">Queso</button>
+</div>
+
+<div id="guisos-tradicionales" style="display:none;">
+  <h4>Guisos Tradicionales</h4>
+  <button onclick="seleccionarGuisoFinal('Pastor')">Pastor</button>
+  <button onclick="seleccionarGuisoFinal('Carne asada')">Carne asada</button>
+  <button onclick="seleccionarGuisoFinal('Pollo')">Pollo</button>
+  <button onclick="seleccionarGuisoFinal('Carne asada Oriental')">Carne asada Oriental</button>
+</div>
+
+<div id="guisos-premium" style="display:none;">
+  <h4>Guisos Premium</h4>
+  <button onclick="seleccionarGuisoFinal('Arrachera')">Arrachera</button>
+  <button onclick="seleccionarGuisoFinal('Salmón')">Salmón</button>
+  <button onclick="seleccionarGuisoFinal('Camarón')">Camarón</button>
+</div>
+
+  <label>
+    <input type="checkbox" onchange="toggleAgua('Acompaña tu comida con un agua del dia', 15,this)">
+    Acompaña tu comida con un agua del día +$15
+  </label>
+  
+</div>
+</section>
+
+
+  <!-- ===================== VENTANITA DELI ===================== -->
+<div id="menu-ventanita" style="display:none;">
+  <div class="menu-header">
+    <img src="./assets/Ventanita deli.png" alt="Ventanita Deli">
+    <h2>Ventanita Deli</h2>
+  </div>
+
+<button class="secondary" onclick="volverInicio()">
+  ← Cambiar restaurante
+</button>
+
+<p><strong>MEZCLA DE QUESOS VENTANITA :</strong>
+   monterrey jack + mozzarella + oaxaca
+</p>
+
+  <!-- CAFÉ -->
+  <h3 onclick="toggleSeccionVentanita('cafe')">☕ Café / Frappes 16oz</h3>
+  <div id="cafe" style="display:none;">
+    <p>Temperatura (obligatorio)</p>
+<label>
+  <input type="radio" name="cafe_temp" onclick="seleccionarCafeTemp('Frío')">
+  Frío
+</label>
+
+<label>
+  <input type="radio" name="cafe_temp" onclick="seleccionarCafeTemp('Caliente')">
+  Caliente
+</label>
+  
+    <ul>
+      <li>Expresso americano — <span class="price">$50</span>
+        <button onclick="agregarCafe('Expresso americano',60)">Agregar</button>
+      </li>
+      <li>Cappuccino — <span class="price">$60</span>
+        <button onclick="agregarCafe('Cappuccino',60)">Agregar</button>
+      </li>
+      <li>Latte — <span class="price">$60</span>
+        <button onclick="agregarCafe('Latte',60)">Agregar</button>
+      </li>
+      <li>Latte caramel — <span class="price">$75</span>
+        <button onclick="agregarCafe('Latte caramel',75)">Agregar</button>
+      </li>
+      <li>Latte vainilla — <span class="price">$75</span>
+        <button onclick="agregarCafe('Latte vainilla',75)">Agregar</button>
+      </li>
+      <li>Latte avellana — <span class="price">$75</span>
+        <button onclick="agregarCafe('Latte avellana',75)">Agregar</button>
+      </li>
+      <li>Macchiatto — <span class="price">$65</span>
+        <button onclick="agregarCafe('Macchiatto',65)">Agregar</button>
+      </li>
+      <li>Caramel macchiatto — <span class="price">$85</span>
+        <button onclick="agregarCafe('Caramel macchiatto',85)">Agregar</button>
+      </li>
+      <li>Flat white (australiano) — <span class="price">$65</span>
+        <button onclick="agregarCafe('Flat white',65)">Agregar</button>
+      </li>
+    </ul>
+
+    <h4>Frappes</h4>
+    <ul>
+      <li>Intenso frap — <span class="price">$85</span>
+        <button onclick="agregarAlCarrito({tipo: 'frappes',nombre:'Inteso frap',precio:85})">Agregar</button>
+      </li>
+      <li>Oreo frap — <span class="price">$95</span>
+        <button onclick="agregarAlCarrito({tipo: 'frappes',nombre:'Oreo frap',precio:95})">Agregar</button>
+      </li>
+      <li>Nutella frap — <span class="price">$95</span>
+      <button onclick="agregarAlCarrito({tipo: 'frappes',nombre:'Nutella frap',precio:95})">Agregar</button>
+      </li>
+      <li>Caramel frap — <span class="price">$95</span>
+        <button onclick="agregarAlCarrito({tipo: 'frappes',nombre:'Caramel frap',precio:95})">Agregar</button>
+      </li>
+      <li>Mazapán frap — <span class="price">$95</span>
+        <button onclick="agregarAlCarrito({tipo: 'frappes',nombre:'Mazapan frap',precio:95})">Agregar</button>
+      </li>
+    </ul>
+
+    <h4>Extras</h4>
+    <label>
+      <input type="checkbox"
+        onchange="toggleExtra('Extra shot',10,this)">
+      Extra shot +$10
+    </label><br>
+
+    <label>
+      <input type="checkbox"
+        onchange="toggleExtra('Extra jarabe',15,this)">
+      Extra jarabe +$15
+    </label>
+  
+    <label>
+      <input type="checkbox"
+      onchange="toggleExtra('Leche de almendras',15,this)">
+      Leche de almendras +$15
+    </label>
+
+    <label>
+      <input type="checkbox"
+      onchange="toggleExtra('Leche de coco',15,this)">
+      Leche de coco +$15
+    </label>
+
+    <label>
+      <input type="checkbox"
+      onchange="toggleExtra('Leche de soya',15,this)">
+      Leche de soya +$15
+    </label>
+  </div>
+
+    <!-- LICUADOS -->
+  <h3 onclick="toggleSeccionVentanita('licuados')">🥛 Licuados 16oz</h3>
+  <div id="licuados" style="display:none;">
+    <ul>
+      <li>Chocomilk — <span class="price">$60</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Chocomilk',precio:60})">Agregar</button>
+      </li>
+      <li>Plátano — <span class="price">$60</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Platano',precio:60})">Agregar</button>
+      </li>
+      <li>Melón — <span class="price">$60</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Melon',precio:60})">Agregar</button>
+      </li>
+      <li>Mango — <span class="price">$60</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Mango',precio:60})">Agregar</button>
+      </li>
+      <li>Fresa — <span class="price">$70</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Fresa',precio:70})">Agregar</button>
+      </li>
+      <li>Chocobanana — <span class="price">$70</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Chocobanana',precio:70})">Agregar</button>
+      </li>
+      <li>Frutos rojos — <span class="price">$70</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Frutos rojos',precio:70})">Agregar</button>
+      </li>
+      <li>Chocofresa — <span class="price">$80</span>
+        <button onclick="agregarAlCarrito({tipo:'licuado',nombre:'Chocofresa',precio:80})">Agregar</button>
+      </li>
+    </ul>
+
+    <h4>Extras</h4>
+    <label>
+      <input type="checkbox"
+        onchange="toggleExtra('Extra shot',10,this)">
+      Extra shot +$10
+    </label><br>
+
+    <label>
+      <input type="checkbox"
+        onchange="toggleExtra('Extra jarabe',15,this)">
+      Extra jarabe +$15
+    </label>
+  
+    <label>
+      <input type="checkbox"
+      onchange="toggleExtra('Leche de almendras',15,this)">
+      Leche de almendras +$15
+    </label>
+
+    <label>
+      <input type="checkbox"
+      onchange="toggleExtra('Leche de coco',15,this)">
+      Leche de coco +$15
+    </label>
+
+    <label>
+      <input type="checkbox"
+      onchange="toggleExtra('Leche de soya',15,this)">
+      Leche de soya +$15
+    </label>
+  </div>
+
+    <!-- TEAVANA -->
+    <h3 onclick="toggleSeccionVentanita('teavana')">Teavana 16oz</h3>
+  <div id="teavana" style="display: none;">
+    <p>Selecciona si tu bebida es fría o caliente (obligatorio)</p>
+<button onclick="seleccionarTeavanaTemp('Frío')">Frío</button>
+<button onclick="seleccionarTeavanaTemp('Caliente')">Caliente</button>
+
+    <ul>
+      <li>Manzanilla — <span class="price">$55</span>
+        <button onclick="agregarTeavana('Manzanilla', 55)">Agregar</button>
+      </li>
+      <li>Té verde — <span class="price">$55</span>
+        <button onclick="agregarTeavana('Te verde', 55)">Agregar</button>
+      </li>
+      <li>English breakfast — <span class="price">$55</span>
+        <button onclick="agregarTeavana('English breakfast', 55)">Agregar</button>
+      </li>
+      <li>Hibiscus — <span class="price">$55</span>
+        <button onclick="agregarTeavana('Hibiscus', 55)">Agregar</button>
+      </li>
+      <li>Mint blend yothberry — <span class="price">$55</span>
+        <button onclick="agregarTeavana('Mint blend yothberry', 55)">Agregar</button>
+      </li>
+    </ul>
+  </div>
+
+    <!-- SMOOTHIES -->
+  <h3 onclick="toggleSeccionVentanita('smoothies')">🍓 Smoothies 16oz</h3>
+  <div id="smoothies" style="display:none;">
+
+<h4>Elegir endulzante (obligatorio)</h4>
+<button onclick="seleccionarEndulzante('Sin azúcar')">Sin azúcar</button>
+<button onclick="seleccionarEndulzante('Con azúcar')">Con azúcar</button>
+<button onclick="seleccionarEndulzante('Splenda')">Splenda</button>
+<button onclick="seleccionarEndulzante('Stevia')">Stevia</button>
+<button onclick="seleccionarEndulzante('Mascabado')">Mascabado</button>
+
+
+    <ul>
+      <li>Tropical — Piña + mango + fresa — <span class="price">$70</span>
+        <button onclick="agregarSmoothie('Tropical — Piña + mango + fresa', 70)">Agregar</button>
+      </li>
+      <li>Tulum — Melón + piña — <span class="price">$70</span>
+        <button onclick="agregarSmoothie('Tulum — Melón + piña', 70)">Agregar</button>
+      </li>
+      <li>Coco berry — Leche de coco + frutos rojos + plátano + coco rallado — <span class="price">$70</span>
+        <button onclick="agregarSmoothie('Coco berry — Leche de coco + frutos rojos + plátano + coco rallado', 70)">Agregar</button>
+      </li>
+      <li>Cancún sunset — Jugo de naranja + plátano + frutos rojos — <span class="price">$70</span>
+        <button onclick="agregarSmoothie('Cancún sunset — Jugo de naranja + plátano + frutos rojos', 70)">Agregar</button>
+      </li>
+    </ul>
+  </div>
+  
+    <!-- JUGOS -->
+    <h3 onclick="toggleSeccionVentanita('jugos')">🧃Jugos 16oz</h3>
+    <div id="jugos" style="display: none;">
+      <ul>
+        <li>Jugo de naranja (en temporada) - <span class="price">$60</span>
+          <button onclick="agregarAlCarrito({tipo:'jugos',nombre:'jugo de naranja',precio:60})">Agregar</button>
+        </li>
+        <li>Jugo verde - <span class="price">$65</span>
+          <button onclick="agregarAlCarrito({tipo:'jugos',nombre:'jugo verde',precio:65})">Agregar</button>
+        </li>
+      </ul>
+    </div>
+  
+<!-- AGUAS -->
+<h3 onclick="toggleSeccionVentanita('aguas')">💧 Aguas naturales 16oz</h3>
+<div id="aguas" style="display:none;">
+
+  <h4>¿Con azúcar?</h4>
+  <button onclick="seleccionarAzucarAgua('Sin azúcar')">Sin azúcar</button>
+  <button onclick="seleccionarAzucarAgua('Con azúcar')">Con azúcar</button>
+
+  <ul>
+    <li>Melón — <span class="price">$50</span>
+      <button onclick="agregarAgua('Melón', 50)">Agregar</button>
+    </li>
+
+    <li>Mango — <span class="price">$50</span>
+      <button onclick="agregarAgua('Mango', 50)">Agregar</button>
+    </li>
+
+    <li>Piña — <span class="price">$50</span>
+      <button onclick="agregarAgua('Piña', 50)">Agregar</button>
+    </li>
+
+    <li>Limonada Natural — <span class="price">$50</span>
+      <button onclick="agregarAgua('Limonada natural', 50)">Agregar</button>
+    </li>
+
+    <li>Limonada Mineral — <span class="price">$50</span>
+      <button onclick="agregarAgua('Limonada mineral', 50)">Agregar</button>
+    </li>
+
+    <li>Fresa — <span class="price">$55</span>
+      <button onclick="agregarAgua('Fresa', 55)">Agregar</button>
+    </li>
+
+    <li>Frutos rojos — <span class="price">$55</span>
+      <button onclick="agregarAgua('Frutos rojos', 55)">Agregar</button>
+    </li>
+
+    <li>Té helado — <span class="price">$20</span>
+      <button onclick="agregarAgua('Té helado', 20)">Agregar</button>
+    </li>
+
+    <li>Agua del día — <span class="price">$20</span>
+      <button onclick="agregarAgua('Agua del día', 20)">Agregar</button>
+    </li>
+
+    <li>Limo-fresa Natural — <span class="price">$60</span>
+      <button onclick="agregarAgua('Limo-fresa natural', 60)">Agregar</button>
+    </li>
+
+    <li>Limo-fresa Mineral — <span class="price">$60</span>
+      <button onclick="agregarAgua('Limo-fresa mineral', 60)">Agregar</button>
+    </li>
+  </ul>
+</div>
+
+
+    <!-- CREPAS -->
+<h3 onclick="toggleSeccionVentanita('crepas')">🥞 Crepas</h3>
+<div id="crepas" style="display:none;">
+
+  <h4>Dulces</h4>
+  <ul>
+    <li>
+      Suprema — <span class="price">$105</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa dulce',
+        nombre:'Suprema',
+        precio:105
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Crepa basic (1 ingrediente) — <span class="price">$80</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa dulce',
+        nombre:'Crepa basic',
+        precio:80
+      })">Agregar</button>
+    </li>
+  </ul>
+
+  <h4>Extras para crepas (+$10 c/u)</h4>
+  <label><input type="checkbox" onchange="toggleExtra('Plátano crepa',10,this)"> Plátano</label><br>
+  <label><input type="checkbox" onchange="toggleExtra('Fresa crepa',10,this)"> Fresa</label><br>
+  <label><input type="checkbox" onchange="toggleExtra('Cajeta crepa',10,this)"> Cajeta</label><br>
+  <label><input type="checkbox" onchange="toggleExtra('Lechera crepa',10,this)"> Lechera</label><br>
+  <label><input type="checkbox" onchange="toggleExtra('Nutella crepa',10,this)"> Nutella</label><br>
+  <label><input type="checkbox" onchange="toggleExtra('Oreo crepa',10,this)"> Oreo</label>
+
+  <h4>Saladas</h4>
+  <ul>
+    <li>
+      Crepa duo — <span class="price">$100</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa salada',
+        nombre:'Crepa duo',
+        precio:100
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Crepa veggie — <span class="price">$90</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa salada',
+        nombre:'Crepa veggie',
+        precio:90
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Crepa pio pio — <span class="price">$100</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa salada',
+        nombre:'Crepa pio pio',
+        precio:100
+      })">Agregar</button>
+    </li>
+  </ul>
+
+  <h4>Especiales</h4>
+  <ul>
+    <li>
+      Mexicana — <span class="price">$150</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa especial',
+        nombre:'Mexicana',
+        precio:150
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Noruega — <span class="price">$150</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Crepa especial',
+        nombre:'Noruega',
+        precio:150
+      })">Agregar</button>
+    </li>
+  </ul>
+</div>
+
+    <!-- MOLLETES -->
+<h3 onclick="toggleSeccionVentanita('molletes')">🥖 Molletes (2 piezas)</h3>
+<div id="molletes" style="display:none;">
+  <ul>
+    <li>
+      Clásicos  
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Clásico JR',
+        precio:60
+      })">JR <span class="price">$60</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Clásico Grande',
+        precio:120
+      })">Grande <span class="price">$120</span></button>
+    </li>
+
+    <li>
+      Con jamón  
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Jamón JR',
+        precio:70
+      })">JR <span class="price">$70</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Jamón Grande',
+        precio:140
+      })">Grande <span class="price">$140</span></button>
+    </li>
+
+    <li>
+      Con tocino  
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Tocino JR',
+        precio:75
+      })">JR <span class="price">$75</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Tocino Grande',
+        precio:135
+      })">Grande <span class="precie">135$</span></button>
+    </li>
+
+    <li>
+      Con huevo  
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Huevo JR',
+        precio:65
+      })">JR <span class="precie">$65</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Huevo Grande',
+        precio:125
+      })">Grande <span class="price">$125</span></button>
+    </li>
+
+    <li>
+      Con chorizo  
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Chorizo JR',
+        precio:65
+      })">JR <span class="price">$65</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Mollete',
+        nombre:'Chorizo Grande',
+        precio:125
+      })">Grande <span class="price">$125</span></button>
+    </li>
+  </ul>
+</div>
+
+<!-- CROISSANTS -->
+<h3 onclick="toggleSeccionVentanita('croissants')">🥐 Croissants</h3>
+<div id="croissants" style="display:none;">
+  <ul>
+
+    <li>Croissant de la mañana — 
+      <span class="price">$75</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant de la mañana',
+        ingredientes:['Huevo','Queso'],
+        precio:75
+      })">Agregar</button>
+    </li>
+
+    <li>Croissant de la mañana especial — 
+      <span class="price">$85</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant de la mañana especial',
+        ingredientes:['Huevo','Jamón','Queso'],
+        precio:85
+      })">Agregar</button>
+    </li>
+
+    <li>Croissant de jamón de pavo — 
+      <span class="price">$75</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant de jamón de pavo',
+        ingredientes:['Jamón de pavo'],
+        precio:75
+      })">Agregar</button>
+    </li>
+
+    <li>Croissant de Nutella — 
+      <span class="price">$45</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant de Nutella',
+        ingredientes:['Nutella'],
+        precio:45
+      })">Agregar</button>
+    </li>
+
+    <li>Croissant de atún — 
+      <span class="price">$75</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant de atún',
+        ingredientes:['Atún'],
+        precio:75
+      })">Agregar</button>
+    </li>
+
+    <li>Croissant italiana — 
+      <span class="price">$85</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant italiana',
+        ingredientes:['Jamón de pavo','Salami'],
+        precio:85
+      })">Agregar</button>
+    </li>
+
+    <li>Croissant de pechuga de pavo — 
+      <span class="price">$100</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Croissant',
+        nombre:'Croissant de pechuga de pavo',
+        ingredientes:['Pechuga de pavo'],
+        precio:100
+      })">Agregar</button>
+    </li>
+
+  </ul>
+</div>
+
+
+<!-- SANDWICHES -->
+<h3 onclick="toggleSeccionVentanita('sandwiches')">🥪 Sandwiches</h3>
+<div id="sandwiches" style="display:none;">
+
+  <!-- TIPOS -->
+  <button class="secondary" onclick="mostrarSandwichTipo('sandwich-salados')">
+    Salados
+  </button>
+  <button class="secondary" onclick="mostrarSandwichTipo('sandwich-dulces')">
+    Dulces
+  </button>
+
+  <!-- ================= SALADOS ================= -->
+  <div id="sandwich-salados" style="display:none;">
+    <ul>
+
+      <li>Champiqueso —
+        <span class="price">$70</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich',
+          nombre:'Champiqueso',
+          ingredientes:['Champiñones','Queso'],
+          precio:70
+        })">Agregar</button>
+      </li>
+
+      <li>Jamón de pavo —
+        <span class="price">$65</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich',
+          nombre:'Jamón de pavo',
+          ingredientes:['Jamón de pavo'],
+          precio:65
+        })">Agregar</button>
+      </li>
+
+      <li>Atún —
+        <span class="price">$70</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich',
+          nombre:'Atún',
+          ingredientes:['Atún'],
+          precio:70
+        })">Agregar</button>
+      </li>
+
+      <li>Club Sandwich —
+        <span class="price">$160</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich',
+          nombre:'Club Sandwich',
+          ingredientes:[
+            'Jamón de pavo',
+            'Tocino',
+            'Huevo',
+            'Queso',
+            'Pollo',
+            'Mix de lechuga',
+            'Side de papas'
+          ],
+          precio:160
+        })">Agregar</button>
+      </li>
+
+    </ul>
+  </div>
+
+  <!-- ================= DULCES ================= -->
+  <div id="sandwich-dulces" style="display:none;">
+    <ul>
+
+      <li>Mermelada y peanut butter —
+        <span class="price">$50</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich dulce',
+          nombre:'Mermelada y peanut butter',
+          precio:50
+        })">Agregar</button>
+      </li>
+
+      <li>Nutella —
+        <span class="price">$40</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich dulce',
+          nombre:'Nutella',
+          precio:40
+        })">Agregar</button>
+      </li>
+
+      <li>Mermelada —
+        <span class="price">$35</span>
+        <button onclick="agregarAlCarrito({
+          tipo:'Sandwich dulce',
+          nombre:'Mermelada',
+          precio:35
+        })">Agregar</button>
+      </li>
+
+    </ul>
+  </div>
+
+</div>
+
+<!-- BAGELS -->
+<h3 onclick="toggleSeccionVentanita('bagels')">🥯 Bagels</h3>
+<div id="bagels" style="display:none;">
+  <ul>
+
+    <li>Salmón a la parrilla —
+      <span class="price">$150</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Bagel',
+        nombre:'Salmón a la parrilla',
+        precio:150
+      })">Agregar</button>
+    </li>
+
+    <li>Jamón de pavo —
+      <span class="price">$105</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Bagel',
+        nombre:'Jamón de pavo',
+        precio:105
+      })">Agregar</button>
+    </li>
+
+    <li>Atún —
+      <span class="price">$100</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Bagel',
+        nombre:'Atún',
+        precio:100
+      })">Agregar</button>
+    </li>
+
+    <li>Pechuga de pavo —
+      <span class="price">$135</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Bagel',
+        nombre:'Pechuga de pavo',
+        precio:135
+      })">Agregar</button>
+    </li>
+
+  </ul>
+</div>
+
+<!-- WRAPS -->
+<h3 onclick="toggleSeccionVentanita('wraps')">🌯 Wraps</h3>
+
+<div id="wraps" style="display:none;">
+<p style="font-size:.95rem; margin-top:-8px;">
+  Incluyen: frijoles, mezcla de quesos Ventanita, mezcla de lechugas,
+  100g de proteína a elección y side de papas fritas
+</p>
+
+  <ul>
+
+    <li>Desayuno (huevo revuelto) —
+      <span class="price">$110</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Desayuno (huevo revuelto)',
+        precio:110
+      })">Agregar</button>
+    </li>
+
+    <li>Arrachera —
+      <span class="price">$160</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Arrachera',
+        precio:160
+      })">Agregar</button>
+    </li>
+
+    <li>Champiqueso (vegetariano) —
+      <span class="price">$120</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Champiqueso vegetariano',
+        precio:120
+      })">Agregar</button>
+    </li>
+
+    <li>Pechuga de pollo —
+      <span class="price">$130</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Pechuga de pollo',
+        precio:130
+      })">Agregar</button>
+    </li>
+
+    <li>Pastor —
+      <span class="price">$120</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Pastor',
+        precio:120
+      })">Agregar</button>
+    </li>
+
+    <li>Carne asada —
+      <span class="price">$120</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Carne asada',
+        precio:120
+      })">Agregar</button>
+    </li>
+
+    <li>Salmón (queso Philadelphia) —
+      <span class="price">$165</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Wrap',
+        nombre:'Salmón con queso Philadelphia',
+        precio:165
+      })">Agregar</button>
+    </li>
+
+  </ul>
+</div>
+
+<!-- TOAST -->
+<h3 onclick="toggleSeccionVentanita('toast')">🍞 Toast</h3>
+<div id="toast" style="display:none;">
+  <ul>
+
+    <li>
+      Aguacate  
+      <button onclick="agregarAlCarrito({
+        tipo:'Toast',
+        nombre:'Aguacate JR',
+        precio:80
+      })">JR <span class="price">$80</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Toast',
+        nombre:'Aguacate Grande',
+        precio:120
+      })">Grande <span class="price">$120</span></button>
+    </li>
+
+    <li>
+      Aguacate con huevo  
+      <button onclick="agregarAlCarrito({
+        tipo:'Toast',
+        nombre:'Aguacate con huevo JR',
+        precio:90
+      })">JR <span class="price">$90</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Toast',
+        nombre:'Aguacate con huevo Grande',
+        precio:130
+      })">Grande <span class="price">$130</span></button>
+    </li>
+
+    <li>
+      Nutella Toast  
+      <button onclick="agregarAlCarrito({
+        tipo:'Toast',
+        nombre:'Nutella Toast JR',
+        precio:40
+      })">JR <span class="price">$40</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Toast',
+        nombre:'Nutella Toast Grande',
+        precio:70
+      })">Grande <span class="price">$70</span></button>
+    </li>
+
+  </ul>
+</div>
+
+
+<!-- BAGUETTES -->
+<h3 onclick="toggleSeccionVentanita('baguettes')">🥖 Baguettes</h3>
+<div id="baguettes" style="display:none;">
+  <ul>
+
+    <li>
+      Pechuga de pollo  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Pechuga de pollo JR',
+        precio:90
+      })">JR <span class="price">$90</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Pechuga de pollo Grande',
+        precio:140
+      })">Grande <span class="price">$140</span></button>
+    </li>
+
+    <li>
+      Arrachera  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Arrachera JR',
+        precio:95
+      })">JR <span class="price">$95</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Arrachera Grande',
+        precio:170
+      })">Grande <span class="price">$170</span></button>
+    </li>
+
+    <li>
+      Champiqueso (Vegetariano)  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Champiqueso JR',
+        precio:80
+      })">JR <span class="price">$80</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Champiqueso Grande',
+        precio:110
+      })">Grande <span class="price">$110</span></button>
+    </li>
+
+    <li>
+      Carne asada  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Carne asada JR',
+        precio:90
+      })">JR <span class="price">$90</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Carne asada Grande',
+        precio:120
+      })">Grande <span class="price">$120</span></button>
+    </li>
+
+    <li>
+      Pastor  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Pastor JR',
+        precio:90
+      })">JR <span class="price">$90</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Pastor Grande',
+        precio:120
+      })">Grande <span class="price">$120</span></button>
+    </li>
+
+    <li>
+      Pierna de cerdo  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Pierna de cerdo JR',
+        precio:70
+      })">JR <span class="price">$70</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Pierna de cerdo Grande',
+        precio:100
+      })">Grande <span class="price">$100</span></button>
+    </li>
+
+    <li>
+      Italiana (Jamón + Salami)  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Italiana JR',
+        precio:90
+      })">JR <span class="price">$90</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Italiana Grande',
+        precio:120
+      })">Grande <span class="price">$120</span></button>
+    </li>
+
+    <li>
+      Bandido  
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Bandido JR',
+        precio:100
+      })">JR <span class="price">$100</span></button>
+
+      <button onclick="agregarAlCarrito({
+        tipo:'Baguette',
+        nombre:'Bandido Grande',
+        precio:175
+      })">Grande <span class="price">$175</span></button>
+    </li>
+
+  </ul>
+</div>
+
+
+<!-- ENSALADAS -->
+<h3 onclick="toggleSeccionVentanita('ensaladas')">🥗 Ensaladas</h3>
+<div id="ensaladas" style="display:none;">
+  <ul>
+
+    <li>
+      César  
+      <span class="price">$135</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Ensalada',
+        nombre:'César',
+        precio:135
+      })">Agregar</button>
+    </li>
+
+    <li>
+      César con pollo (100g)  
+      <span class="price">$135</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Ensalada',
+        nombre:'César con pollo',
+        precio:135
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Ensalada mexicana  
+      <span class="price">$150</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Ensalada',
+        nombre:'Ensalada mexicana',
+        precio:150
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Ensalada Honey Honey  
+      <span class="price">$135</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Ensalada',
+        nombre:'Honey Honey',
+        precio:135
+      })">Agregar</button>
+    </li>
+
+    <li>
+      Ensalada de atún  
+      <span class="price">$110</span>
+      <button onclick="agregarAlCarrito({
+        tipo:'Ensalada',
+        nombre:'Ensalada de atún',
+        precio:110
+      })">Agregar</button>
+    </li>
+
+  </ul>
+</div>
+
+
+    <!-- HAMBURGUESAS -->
+  <h3 onclick="toggleSeccionVentanita('burgers')">🍔 Hamburguesas</h3>
+  <div id="burgers" style="display:none;">
+    <ul>
+      <li>Ventanita — <span class="price">$125</span>
+        <button onclick="agregarAlCarrito({tipo:'Hamburguesa',nombre:'Ventanita',precio:125})">Agregar</button>
+      </li>
+      <li>Ventanita deluxe — <span class="price">$175</span>
+        <button onclick="agregarAlCarrito({tipo:'Hamburguesa',nombre:'Ventanita deluxe',precio:175})">Agregar</button>
+      </li>
+    </ul>
+  </div>
+
+    <label>
+    <input type="checkbox" onchange="toggleAgua('Acompaña tu comida con un agua o te del dia', 15,this)">
+    Acompaña tu comida con un agua o te del día +$15
+  </label>
+
+</div>
+</section>
+  
+  
+<!--identificador de pedido-->
+<div class="card datos-cliente">
+  <h3>🧾 Datos del pedido</h3>
+
+  <label>Nombre *</label>
+  <input type="text" id="nombre-cliente" placeholder="Ej. Juan Pérez">
+
+  <label>Celular *</label>
+  <input type="tel" id="telefono-cliente" placeholder="Ej. 9991234567">
+
+  <label>¿A qué hora necesitas tu pedido? *</label>
+  <input type="time" id="hora-pedido">
+</div>
+
+
+<!--CARRRITO-->
+    <div id="carrito" class="carrito">
+    <h3>🛒 Tu pedido</h3>
+    <ul id="carrito-items"></ul>
+    <strong>Total: $<span id="total">0</span></strong>
+    <button onclick="enviarComanda()">Enviar pedido</button>
+    <button onclick="pagarPedido()" class="btn-pago">💳 Pagar</button>
+  </div>
+
+    <!-- COMENTARIOS -->
+<div class="comentarios">
+  <label for="comentario">💬 Comentarios para cocina (opcional)</label>
+  <textarea 
+    id="comentario"
+    placeholder="Ej: sin cebolla, poco azúcar, para llevar..."
+    rows="3"></textarea>
+    <button onclick="enviarComentarioLibre()" class="secondary">
+  ✍️ Enviar comentario
+</button>
+</div>
+
+<script src="./js/menu.js"></script>
+
+</body>
+</html>
