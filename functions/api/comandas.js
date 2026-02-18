@@ -1,4 +1,5 @@
 export async function onRequest({ request, env }) {
+
   const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
@@ -10,63 +11,112 @@ export async function onRequest({ request, env }) {
     return new Response(null, { headers });
   }
 
-  // POST → guardar comanda
-if (request.method === 'POST') {
-  const data = await request.json();
+  try {
 
-  // Obtener el último número de orden registrado
-  const { results } = await env.DB
-    .prepare(`SELECT MAX(numero) as ultimo FROM comandas`)
-    .all();
+    const data = await request.json();
 
-  const ultimoNumero = results[0]?.ultimo || 0;
-  const nuevoNumero = ultimoNumero + 1; // nuevo número consecutivo
+    /* ===============================
+       GUARDAR COMENTARIO (FEEDBACK)
+    =============================== */
+    if (data.tipo === 'feedback') {
 
-  if (data.tipo === 'feedback') {
+      await env.DB.prepare(`
+        INSERT INTO comandas (
+          numero,
+          fecha,
+          items,
+          total,
+          comentario,
+          nombre,
+          telefono,
+          hora
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `).bind(
+        null,
+        data.fecha,
+        '[]',
+        0,
+        data.comentario,
+        'Comentario',
+        '',
+        ''
+      ).run();
 
-  await env.DB.prepare(`
-    INSERT INTO comandas (tipo, comentario, fecha)
-    VALUES (?, ?, ?)
-  `).bind(
-    'feedback',
-    data.comentario,
-    data.fecha
-  ).run();
+      return new Response(JSON.stringify({
+        success: true
+      }), { headers });
 
-  return new Response(JSON.stringify({
-    success: true
-  }), { headers });
+    }
+
+    /* ===============================
+       GUARDAR PEDIDO NORMAL
+    =============================== */
+
+    if (request.method === 'POST') {
+
+      const { results } = await env.DB
+        .prepare(`SELECT MAX(numero) as ultimo FROM comandas`)
+        .all();
+
+      const nuevoNumero = (results[0]?.ultimo || 0) + 1;
+
+      await env.DB.prepare(`
+        INSERT INTO comandas (
+          numero,
+          fecha,
+          items,
+          total,
+          comentario,
+          nombre,
+          telefono,
+          hora
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `).bind(
+        nuevoNumero,
+        data.fecha,
+        JSON.stringify(data.items),
+        data.total,
+        data.comentario || null,
+        data.nombre,
+        data.telefono,
+        data.hora
+      ).run();
+
+      return new Response(JSON.stringify({
+        success: true,
+        numero: nuevoNumero
+      }), { headers });
+
+    }
+
+    /* ===============================
+       LEER COMANDAS
+    =============================== */
+
+    if (request.method === 'GET') {
+
+      const { results } = await env.DB
+        .prepare(`
+          SELECT * FROM comandas
+          ORDER BY numero DESC, creado_en DESC
+        `)
+        .all();
+
+      return new Response(JSON.stringify(results), { headers });
+
+    }
+
+  } catch (error) {
+
+    return new Response(JSON.stringify({
+      error: error.message
+    }), {
+      status: 500,
+      headers
+    });
+
+  }
+
 }
-
-await env.DB.prepare(`
-  INSERT INTO comandas (numero, nombre, telefono, hora, fecha, items, total, comentario)
-  VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-`).bind(
-  nuevoNumero,
-  data.nombre,
-  data.telefono,
-  data.hora,
-  data.fecha,
-  JSON.stringify(data.items),
-  data.total,
-  data.comentario || null
-).run();
-
-  return new Response(JSON.stringify({
-  success: true,
-  numero: nuevaOrden.numero
-}), { status: 200 });
-
-}
-
-  // GET → leer comandas
-if (request.method === 'GET') {
-  const { results } = await env.DB
-    .prepare(`SELECT * FROM comandas ORDER BY numero DESC`)
-    .all();
-
-  return new Response(
-    JSON.stringify(results),
-    { headers }
-  );
-}}
