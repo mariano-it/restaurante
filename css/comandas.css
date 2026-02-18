@@ -36,3 +36,13 @@ button {
   font-weight: 800;
   letter-spacing: 1px;
 }
+
+.comentario {
+  background: #e3f2fd;
+  border-left: 5px solid #2196f3;
+}
+
+.pedido {
+  background: #ffffff;
+  border-left: 5px solid #4caf50;
+}
