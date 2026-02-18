@@ -13,6 +13,7 @@ async function obtenerComandas() {
 
 /* ========= RENDER ========= */
 async function renderComandas() {
+
   let comandas;
 
   try {
@@ -28,6 +29,72 @@ async function renderComandas() {
     contenedor.innerHTML = '<p>No hay comandas registradas</p>';
     return;
   }
+
+
+  comandas.forEach(comanda => {
+
+    const div = document.createElement('div');
+
+
+    /* ============================
+       SI ES COMENTARIO
+    ============================ */
+
+    if (comanda.numero === null) {
+
+      div.className = 'comentario-box';
+
+      div.innerHTML = `
+        <h3>💬 Comentario recibido</h3>
+
+        <small>📅 ${comanda.fecha}</small>
+
+        <p>${comanda.comentario}</p>
+      `;
+
+    }
+
+
+    /* ============================
+       SI ES PEDIDO NORMAL
+    ============================ */
+
+    else {
+
+      div.className = 'comanda';
+
+      div.innerHTML = `
+        <h2>🍽️ ${comanda.nombre}</h2>
+
+        <small>
+        📞 ${comanda.telefono}<br>
+        ⏰ Para las ${comanda.hora}<br>
+        📅 ${comanda.fecha}
+        </small>
+
+        <ul>
+          ${JSON.parse(comanda.items).map(item => `
+            <li>
+              ${item.tipo} ${item.nombre || ''}
+              ${item.detalle ? `(${item.detalle})` : ''}
+              — $${item.precio}
+            </li>
+          `).join('')}
+        </ul>
+
+        <strong>Total: $${comanda.total}</strong>
+
+        ${comanda.comentario
+          ? `<p><strong>📝 Nota:</strong> ${comanda.comentario}</p>`
+          : ''}
+      `;
+
+    }
+
+
+    contenedor.appendChild(div);
+
+  });
 
   // 🔽 ORDENAR: la más nueva arriba
   comandas.sort((a, b) => b.numero - a.numero);
