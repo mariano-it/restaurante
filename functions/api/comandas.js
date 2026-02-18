@@ -13,47 +13,68 @@ export async function onRequest({ request, env }) {
 
   try {
 
-    const data = await request.json();
-
     /* ===============================
-       GUARDAR COMENTARIO (FEEDBACK)
+       GET → LEER COMANDAS
     =============================== */
-    if (data.tipo === 'feedback') {
 
-      await env.DB.prepare(`
-        INSERT INTO comandas (
-          numero,
-          fecha,
-          items,
-          total,
-          comentario,
-          nombre,
-          telefono,
-          hora
-        )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `).bind(
-        null,
-        data.fecha,
-        '[]',
-        0,
-        data.comentario,
-        'Comentario',
-        '',
-        ''
-      ).run();
+    if (request.method === 'GET') {
 
-      return new Response(JSON.stringify({
-        success: true
-      }), { headers });
+      const { results } = await env.DB
+        .prepare(`
+          SELECT * FROM comandas
+          ORDER BY numero DESC, creado_en DESC
+        `)
+        .all();
+
+      return new Response(JSON.stringify(results), { headers });
 
     }
 
+
     /* ===============================
-       GUARDAR PEDIDO NORMAL
+       POST → GUARDAR
     =============================== */
 
     if (request.method === 'POST') {
+
+      const data = await request.json();
+
+
+      /* ===== FEEDBACK ===== */
+
+      if (data.tipo === 'feedback') {
+
+        await env.DB.prepare(`
+          INSERT INTO comandas (
+            numero,
+            fecha,
+            items,
+            total,
+            comentario,
+            nombre,
+            telefono,
+            hora
+          )
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        `).bind(
+          null,
+          data.fecha,
+          '[]',
+          0,
+          data.comentario,
+          'Comentario',
+          '',
+          ''
+        ).run();
+
+        return new Response(JSON.stringify({
+          success: true
+        }), { headers });
+
+      }
+
+
+      /* ===== PEDIDO NORMAL ===== */
 
       const { results } = await env.DB
         .prepare(`SELECT MAX(numero) as ultimo FROM comandas`)
@@ -91,22 +112,6 @@ export async function onRequest({ request, env }) {
 
     }
 
-    /* ===============================
-       LEER COMANDAS
-    =============================== */
-
-    if (request.method === 'GET') {
-
-      const { results } = await env.DB
-        .prepare(`
-          SELECT * FROM comandas
-          ORDER BY numero DESC, creado_en DESC
-        `)
-        .all();
-
-      return new Response(JSON.stringify(results), { headers });
-
-    }
 
   } catch (error) {
 
