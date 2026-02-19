@@ -42,36 +42,44 @@ export async function onRequest({ request, env }) {
 
       /* ===== FEEDBACK ===== */
 
-      if (data.tipo === 'feedback') {
+if (data.tipo === 'feedback') {
 
-        await env.DB.prepare(`
-          INSERT INTO comandas (
-            numero,
-            fecha,
-            items,
-            total,
-            comentario,
-            nombre,
-            telefono,
-            hora
-          )
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        `).bind(
-          null,
-          data.fecha,
-          '[]',
-          0,
-          data.comentario,
-          'Comentario',
-          '',
-          ''
-        ).run();
+  const { results } = await env.DB
+    .prepare(`SELECT MAX(numero) as ultimo FROM comandas`)
+    .all();
 
-        return new Response(JSON.stringify({
-          success: true
-        }), { headers });
+  const nuevoNumero = (results[0]?.ultimo || 0) + 1;
 
-      }
+  await env.DB.prepare(`
+    INSERT INTO comandas (
+      numero,
+      fecha,
+      items,
+      total,
+      comentario,
+      nombre,
+      telefono,
+      hora
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `).bind(
+    nuevoNumero,        // ✅ YA NO ES NULL
+    data.fecha,
+    '[]',
+    0,
+    data.comentario,
+    'Comentario',
+    '',
+    ''
+  ).run();
+
+  return new Response(JSON.stringify({
+    success: true,
+    numero: nuevoNumero
+  }), { headers });
+
+}
+
 
 
       /* ===== PEDIDO NORMAL ===== */
@@ -125,3 +133,4 @@ export async function onRequest({ request, env }) {
   }
 
 }
+
