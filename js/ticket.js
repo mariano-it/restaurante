@@ -32,7 +32,7 @@ async function cargarTicket() {
       `).join('')}
     </ul>
 
-<div class="total">Total: $${ticket.total}</div>
+<div class="total">Total: $${comanda.total ?? 0}</div>
 
 <div style="margin-top:20px; padding:12px; background:#fff3cd; border-radius:8px;">
   <p style="margin:0; font-weight:bold;">
@@ -51,3 +51,4 @@ async function cargarTicket() {
 }
 
 cargarTicket();
+
