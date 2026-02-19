@@ -168,14 +168,17 @@ async function enviarComanda() {
     return;
   }
 
-  const nuevaComanda = {
-    nombre,
-    telefono,
-    hora,
-    fecha: new Date().toLocaleString(),
-    items: carrito,
-    total
-  };
+const comentario = document.getElementById('comentario')?.value.trim() || null;
+
+const nuevaComanda = {
+  nombre,
+  telefono,
+  hora,
+  fecha: new Date().toLocaleString(),
+  items: carrito,
+  total,
+  comentario // ← ESTA LÍNEA ES LA CLAVE
+};
 
   const res = await fetch('/api/comandas', {
     method: 'POST',
@@ -566,3 +569,4 @@ function volverInicio() {
   document.getElementById('menu-rengodeli').style.display = 'none';
   document.getElementById('inicio').style.display = 'block';
 }
+
