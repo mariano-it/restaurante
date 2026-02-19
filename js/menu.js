@@ -218,6 +218,7 @@ function pagarPedido() {
 }
 
 async function enviarComentarioLibre() {
+
   const comentario = document.getElementById('comentario')?.value.trim();
 
   if (!comentario) {
@@ -228,17 +229,40 @@ async function enviarComentarioLibre() {
   const feedback = {
     tipo: 'feedback',
     comentario: comentario,
-    fecha: new Date().toLocaleString()
+    fecha: new Date().toLocaleString(),
+    total: 0,
+    items: []
   };
 
-  await fetch('/api/comandas', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(feedback)
-  });
+  try {
 
-  document.getElementById('comentario').value = '';
-  alert('¡Gracias por tu comentario! 💙');
+    const res = await fetch('/api/comandas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(feedback)
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error(data);
+      alert('Error al enviar comentario');
+      return;
+    }
+
+    document.getElementById('comentario').value = '';
+
+    alert('¡Gracias por tu comentario! 💙');
+
+  } catch (error) {
+
+    console.error(error);
+    alert('Error de conexión');
+
+  }
+
 }
 
 
@@ -569,4 +593,5 @@ function volverInicio() {
   document.getElementById('menu-rengodeli').style.display = 'none';
   document.getElementById('inicio').style.display = 'block';
 }
+
 
