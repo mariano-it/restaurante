@@ -147,6 +147,16 @@ function agregarAgua(nombre, precio) {
   aguaAzucar = null;
 }
 
+function agregarRefresco(nombre, precio) {
+
+  agregarAlCarrito({
+    tipo: 'Refresco',
+    nombre: nombre,
+    precio: precio
+  });
+
+}
+
 
 async function enviarComanda() {
   const nombre = document.getElementById('nombre-cliente').value.trim();
@@ -593,5 +603,6 @@ function volverInicio() {
   document.getElementById('menu-rengodeli').style.display = 'none';
   document.getElementById('inicio').style.display = 'block';
 }
+
 
 
